@@ -1,0 +1,42 @@
+<div class="flex flex-col justify-center items-center w-1/2 mx-auto h-screen">
+    <div class="lg:w-1/2 xs:w-full mb-3 md:w-full border-primary border-2  rounded-3xl hover:border-primary-400">
+        <h1 class="text-primary  text-center pt-3 font-bold">{{state=='add'?"Add":"Update"}} Offer</h1>
+    </div>
+    <form (ngSubmit)="FormHandler()" [formGroup]="OfferForm" class="">
+        <app-input [control]="OfferName" label="Offer Name*" id="offer-name"></app-input>
+        <div class="my-3">
+            <label for="Providers"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Providers*</label>
+            <select [formControl]="Provider" id="Providers" data-te-select-init data-te-select-filter="true">
+                <ng-container *ngFor="let Provider of Providers;let first=first">
+                    <option [selected]="first" [value]="Provider.id">{{Provider.name}}</option>
+                </ng-container>
+            </select>
+            <p class="text-red-600 text-base " *ngIf="Provider?.errors?.['required']&&Provider?.['touched']">
+                Provider is
+                Required
+            </p>
+        </div>
+        <div class="flex justify-between gap-x-10">
+            <app-input [control]="NumberOfMonths" label="Number of Months*" id="months-number"
+                [type]="'number'"></app-input>
+            <app-input [control]="NumberOfFreeMonths" label="Number of Free Months*" id="free-month-number"
+                [type]="'number'"></app-input>
+            <app-input [control]="Discount" label="Discount*" id="discount" [type]="'number'"></app-input>
+        </div>
+        <app-input [control]="CancelFee" label="Cancel Fee*" id="cancel-fee" [type]="'number'"></app-input>
+        <app-input *ngIf="showRouterFee" [control]="RouterFee" #routerFee label="Router Fee*" id="router-fee"
+            [type]="'number'"></app-input>
+        <app-input [control]="FreeMonthsFirst" label="Free Months First" id="free-month-first"
+            [type]="'checkbox'"></app-input>
+        <app-input [control]="FreeRouter" (Onchecked)="disableRouterfee($event)" label="Free Router" id="free-router"
+            [type]="'checkbox'"></app-input>
+        <app-input [control]="IsPercent" label="Is Percent" id="is-percent" [type]="'checkbox'"></app-input>
+        <app-input [control]="IsTotalBill" label="Total Bill" id="is-percent" [type]="'checkbox'"></app-input>
+        <button [disabled]="OfferForm.status=='INVALID'"
+            [ngClass]="{'bg-gray-400 opacity-50 hover:bg-gray-500':OfferForm.status=='INVALID'}" type="submit"
+            class="add-btn">Submit</button>
+        <a type="button" class="cancel-btn" routerLink="/offers" data-te-ripple-init data-te-ripple-color="light">Back
+        </a>
+    </form>
+</div>

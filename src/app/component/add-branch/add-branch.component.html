@@ -1,0 +1,40 @@
+<div class="flex flex-col justify-center items-center w-1/2 mx-auto h-screen">
+    <div class="lg:w-1/2 xs:w-full md:w-full border-primary border-2  rounded-3xl hover:border-primary-400">
+        <h1 class="text-primary  text-center pt-3 font-bold">{{state=="Add"?"Add":"Update"}} Branch </h1>
+    </div>
+    <form (ngSubmit)="FromSubmit()" [formGroup]="branchFrom" class="w-full">
+        <app-input [id]="'name'" label="Name*" [control]="Name"></app-input>
+        <div class="grid grid-cols-2 gap-2">
+            <app-input [id]="'tel1'" label="Tel1*" [control]="Tel1"></app-input>
+            <app-input [id]="'tel2'" label="Tel2*" [control]="Tel2"></app-input>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+            <app-input [id]="'phone1'" label="Phone1*" [control]="Phone1"></app-input>
+            <app-input [id]="'phone2'" label="Phone2*" [control]="Phone2"></app-input>
+        </div>
+        <app-input [id]="'Fax'" label="Fax*" [control]="Fax"></app-input>
+        <div class="my-3">
+            <label for="Governorate"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Governorate*</label>
+            <select [formControl]="Governorate" id="Governorate" data-te-select-init data-te-select-filter="true">
+                <option *ngFor="let Governorate of governorates" [value]="Governorate.code">{{Governorate.name}}
+                </option>
+            </select>
+            <p class="text-red-600 text-base " *ngIf="Governorate?.errors?.['required']&&(!Governorate?.['pristine'])">
+                Governorate is
+                Required
+            </p>
+        </div>
+        <div class="my-3">
+            <label for="Manager" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Manager</label>
+            <select [formControl]="Manager" id="Manager" data-te-select-init>
+                <option selected value=null>Select a Manager</option>
+            </select>
+        </div>
+        <button [disabled]="branchFrom.status=='INVALID'"
+            [ngClass]="{'bg-gray-400 opacity-50 hover:bg-gray-500':branchFrom.status=='INVALID'}" type="submit"
+            class="add-btn">Submit</button>
+        <a routerLink="/branch" class="cancel-btn" data-te-ripple-init data-te-ripple-color="light">Back
+        </a>
+    </form>
+</div>
