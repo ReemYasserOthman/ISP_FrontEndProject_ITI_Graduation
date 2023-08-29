@@ -6,10 +6,13 @@
     "start": "ng serve -o",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "private": true,
   "dependencies": {
+    "homepage":"http://ReemYasserOthman.github.io/ISP_FrontEndProject_ITI_Graduation",
     "@angular/animations": "^15.2.0",
     "@angular/cdk": "^15.2.9",
     "@angular/common": "^15.2.0",
@@ -33,7 +36,9 @@
     "@angular/cli": "~15.2.7",
     "@angular/compiler-cli": "^15.2.0",
     "@types/jasmine": "~4.3.0",
+    "angular-cli-ghpages": "^1.0.7",
     "autoprefixer": "^10.4.14",
+    "gh-pages": "^6.0.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
